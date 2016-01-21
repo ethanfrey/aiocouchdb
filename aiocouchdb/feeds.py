@@ -143,7 +143,13 @@ class ViewFeed(Feed):
             self._total_rows = event['total_rows']
             self._offset = event.get('offset')
             return (yield from self.next())
-        elif chunk.startswith(('{"rows"', ']}')):
+        elif chunk.startswith('"total_rows"'):
+            chunk = '{' + chunk
+            event = json.loads(chunk)
+            self._total_rows = event['total_rows']
+            self._offset = event.get('offset')
+            return (yield from self.next())
+        elif chunk.startswith(('{"rows"', ']')):
             return (yield from self.next())
         else:
             return json.loads(chunk)
