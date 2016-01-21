@@ -273,7 +273,7 @@ class HttpSession(object):
     <aiohttp.connector.TCPConnector>`."""
 
     request_class = HttpRequest
-    response_class = HttpResponse
+    response_class = HttpStreamResponse
 
     def __init__(self, *, auth=None, connector=None, loop=None):
         self._auth = auth or NoAuthProvider()

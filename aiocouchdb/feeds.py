@@ -56,7 +56,7 @@ class Feed(object):
     def _loop(self):
         try:
             while not self._resp.content.at_eof() and self._active:
-                chunk = yield from self._resp.content.read()
+                chunk = yield from self._resp.content.readline()
                 if not chunk or chunk == b'\n':  # ignore heartbeats
                     continue
                 yield from self._queue.put(chunk)
