@@ -143,7 +143,7 @@ class ViewFeed(Feed):
         if "total_rows" in chunk:
             # couchdb 1.x (and 2.x?)
             if chunk.startswith('{'):
-               chunk += ']}'
+                chunk += ']}'
             # couchbase sync gateway 1.x
             elif chunk.endswith('}'):
                 chunk = '{' + chunk
